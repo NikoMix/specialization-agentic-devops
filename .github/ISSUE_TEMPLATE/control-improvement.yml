@@ -1,0 +1,53 @@
+name: Control improvement
+description: Refine an audit control's evidence list, guidance, or common gaps based on a real engagement finding.
+title: "[control] A.x.y / B.x.y — <short description>"
+labels: ["innersource", "audit-evidence"]
+body:
+  - type: input
+    id: control
+    attributes:
+      label: Control reference
+      description: e.g. A.2.1, B.1.1
+      placeholder: A.2.1
+    validations:
+      required: true
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: Type of change
+      options:
+        - Add missing evidence item
+        - Reword existing evidence item
+        - Remove obsolete evidence item
+        - Add common gap
+        - Update guidance / how-to
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What does the page currently say?
+      placeholder: Paste or summarise the current text.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: What should it say instead?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Engagement evidence behind the change
+      description: Which engagement surfaced this? (Anonymise customer detail.)
+    validations:
+      required: true
+  - type: checkboxes
+    id: sync
+    attributes:
+      label: Downstream sync
+      options:
+        - label: I will also update `.github/scripts/create-issues.sh` if the evidence checkbox list changes.
+        - label: I will also update `evidence-tracker.mdx` if the control's row needs to change.

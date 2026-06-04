@@ -1,0 +1,60 @@
+---
+title: "Engagement Playbook – Microsoft Assessment Platform Inputs"
+description: How to feed Agentic DevOps engagement findings into Microsoft Assessment Platform (DevOps maturity), Copilot Readiness Assessment, and Secure DevOps Kit signals.
+sidebar:
+  label: "Assessment Platform Inputs"
+  order: 5
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+## When to use this
+
+Use this page during the discovery workshop's baseline tour to capture inputs that you will later submit to Microsoft assessments. Filing the assessments on behalf of the customer accelerates co-sell motions and unlocks Microsoft-funded follow-on work.
+
+## Assessments in scope
+
+| Assessment | What it measures | When to file |
+|---|---|---|
+| **DevOps maturity** | Process, automation, security maturity | At end of discovery |
+| **Copilot Readiness** | License entitlement, network readiness, governance | Before pilot |
+| **GHAS posture signals** | Code scanning, secret scanning, dependency review activation | After GHAS baseline |
+| **Cloud Adoption Framework (CAF)** | Landing zone maturity (only if Azure DevOps → GitHub migration includes new Azure landing) | During design |
+
+## Inputs you need from the customer
+
+| # | Input | Source | Format |
+|---|---|---|---|
+| 1 | Org-level GitHub / ADO metrics export | GHEC admin / ADO | CSV |
+| 2 | Pipeline metrics (last 90 days) | GHEC / ADO | CSV |
+| 3 | License inventory (Copilot, GHAS, ADO) | Billing admin | CSV |
+| 4 | Network topology summary | Customer architect | Diagram |
+
+## Step-by-step
+
+The following sequence captures inputs once and submits to multiple assessments.
+
+<Steps>
+1. Open the input workbook (link below) and fill the four pre-baseline tabs.
+2. During the discovery workshop baseline tour, fill the live-discovery tabs.
+3. After the workshop, the workbook auto-rolls inputs into the DevOps Maturity tab and the Copilot Readiness tab.
+4. Submit DevOps Maturity to the Microsoft Assessment Platform on the customer's behalf (with consent).
+5. Submit Copilot Readiness via the customer's Microsoft account team.
+6. Attach the GHAS posture export to the customer's Security review.
+</Steps>
+
+## Output: customer-ready deliverable
+
+A populated XLSX workbook plus three pre-filled assessment submissions.
+
+<Aside type="tip" title="Download the workfile">
+  <a href={`${import.meta.env.BASE_URL}templates/engagement/assessment-platform-inputs.xlsx`}>📄 Download the Assessment Platform Inputs workbook (XLSX)</a>
+</Aside>
+
+## Reuse & contribute back
+
+<Aside type="tip">
+  Microsoft assessments evolve frequently. PR the workbook and this MDX page
+  when the assessment surface changes. Use the `template-improvement` issue
+  template.
+</Aside>

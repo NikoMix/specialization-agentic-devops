@@ -1,0 +1,47 @@
+name: Template improvement
+description: Improve a customer deliverable template (HLD, LLD, runbook, KT plan, hypercare plan, discovery deck, etc.) or any downloadable workfile.
+title: "[template] <template name> — <short description>"
+labels: ["innersource", "template"]
+body:
+  - type: dropdown
+    id: template
+    attributes:
+      label: Which template?
+      options:
+        - Offering one-pager (PPTX)
+        - Qualification questionnaire (DOCX)
+        - Discovery workshop deck (PPTX)
+        - Discovery workshop workbook (XLSX)
+        - WAF assessment (XLSX)
+        - Assessment platform inputs (XLSX)
+        - HLD template (DOCX)
+        - LLD template (DOCX)
+        - Runbook template (DOCX)
+        - KT plan template (DOCX)
+        - Hypercare plan template (DOCX)
+        - Definition of done (DOCX)
+        - Evidence tracker (XLSX)
+        - Pre-qual checklist (XLSX)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What should change?
+      placeholder: New section, reordered slides, additional WAF questions, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why?
+      description: Which engagement surfaced this? (Anonymise customer detail.)
+    validations:
+      required: true
+  - type: checkboxes
+    id: sync
+    attributes:
+      label: Downstream sync
+      options:
+        - label: I will also update the matching MDX page in `src/content/docs/engagement/` so the download link and the on-page guidance stay aligned.

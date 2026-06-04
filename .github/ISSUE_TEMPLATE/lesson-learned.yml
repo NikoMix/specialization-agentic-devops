@@ -1,0 +1,46 @@
+name: Lesson learned
+description: Capture a lesson from a delivered Agentic DevOps engagement so the next consultant benefits.
+title: "[lesson] <engagement codename / sector> — <short title>"
+labels: ["innersource", "lesson-learned"]
+body:
+  - type: input
+    id: engagement
+    attributes:
+      label: Engagement codename or sector
+      placeholder: e.g. Customer A — UK retail
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Engagement phase where the lesson surfaced
+      options:
+        - Qualify
+        - Discover
+        - Design
+        - Deliver
+        - Hypercare
+        - Post-engagement / audit
+    validations:
+      required: true
+  - type: textarea
+    id: situation
+    attributes:
+      label: Situation
+      description: What happened? (Anonymise customer detail.)
+    validations:
+      required: true
+  - type: textarea
+    id: lesson
+    attributes:
+      label: Lesson
+      description: What would you do differently next time?
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed repo change
+      description: Which page or template should be updated as a result? Link any control or playbook page.
+    validations:
+      required: true

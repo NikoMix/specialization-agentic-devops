@@ -1,0 +1,107 @@
+---
+title: "B.4.1 – Audit Readiness"
+description: Evidence requirements for control B.4.1 – packaging, indexing, and pre-audit review of the full evidence submission.
+sidebar:
+  label: "4.1 Audit Readiness"
+  order: 5
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies that your organisation has prepared a **structured, indexed evidence package** ready for review — not a loose collection of files emailed at the last minute.
+
+**Typical questions:**
+
+- Is there a master evidence index mapping every control to evidence files?
+- Has the package been reviewed internally before submission?
+- Are documents version-controlled and consistently named?
+
+---
+
+## Required Evidence Checklist
+
+The five items below cover the index, the package, the internal review, and the submission record.
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Master evidence index** (control → file → version → date) | Excel, PDF | ⬜ |
+| 2 | **Packaged evidence folder** with consistent naming and structure | ZIP, SharePoint link | ⬜ |
+| 3 | **Internal pre-audit review record** (sign-off by practice lead) | PDF, Word | ⬜ |
+| 4 | **Submission confirmation** from the auditor | Email, PDF | ⬜ |
+| 5 | **Issue tracker** for auditor queries and responses | Excel, GitHub Issues | ⬜ |
+
+<Aside type="tip" title="Download the workfile">
+  This repo ships an Evidence Tracker workbook —
+  <a href={`${import.meta.env.BASE_URL}templates/audit/evidence-tracker.xlsx`}>📄 Download the XLSX</a> —
+  that can serve as your master index. One row per control, with columns for owner, file name,
+  version, date, and submission status.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Folder Structure
+
+Recommended layout for the submitted evidence package:
+
+```
+Audit_<Year>/
+├── 00_Evidence_Index.xlsx
+├── 01_Module_A/
+│   ├── A1.1_Organisational_Data/
+│   ├── A1.2_Financial_Documentation/
+│   ├── A2.1_Service_Delivery_Methodology/
+│   ├── A2.2_Quality_Management/
+│   ├── A3.1_Customer_Satisfaction/
+│   ├── A3.2_Complaint_Handling/
+│   └── A3.3_Security_Privacy/
+├── 02_Module_B/
+│   ├── B1.1_Agentic_DevOps_Capability/
+│   ├── B2.1_ACR_Performance/
+│   ├── B2.2_Customer_Diversity/
+│   ├── B3.1_Certifications/
+│   ├── B4.1_Audit_Readiness/
+│   └── B4.2_Partner_Onboarding/
+└── 99_Auditor_Queries/
+```
+
+### File Naming
+
+`[ControlRef]_[DocumentType]_v[N].pdf` — e.g. `A2.1_DeliveryMethodology_v2.pdf`.
+
+### Internal Pre-Audit Review
+
+Run a 1–2 hour internal review with:
+
+- Practice lead (overall sign-off)
+- Compliance / quality lead (Module A)
+- Technical lead (Module B)
+- Engagement lead (cross-reference with active customer engagements)
+
+Document the review with a short sign-off note in the package.
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Due Date | Status | Notes |
+|---|---|---|---|---|
+| Master evidence index | | | ⬜ | |
+| Packaged evidence folder | | | ⬜ | |
+| Pre-audit review record | | | ⬜ | |
+| Submission confirmation | | | ⬜ | |
+| Auditor query tracker | | | ⬜ | |
+
+---
+
+## Common Gaps
+
+| Gap | Remediation |
+|---|---|
+| Evidence sent as loose email attachments | Repackage into the folder structure above; share via SharePoint or auditor portal |
+| No master index | Build the index from the downloadable XLSX template; one row per control |
+| No internal review | Block 90 minutes with practice + technical leads; document attendance and outcomes |
+| File names inconsistent | Use a rename script (PowerShell `Rename-Item`) to enforce the convention |

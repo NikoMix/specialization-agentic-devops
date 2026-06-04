@@ -1,0 +1,75 @@
+---
+title: "Engagement Playbook – Customer Qualification Questionnaire"
+description: 15–25 questions covering current SCM, CI/CD, security posture, AI policy, EMU/SSO state, and license entitlement to qualify an Agentic DevOps opportunity.
+sidebar:
+  label: "Qualification Questionnaire"
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+## When to use this
+
+After the offering one-pager lands and the customer responds with interest, run the qualification questionnaire **before** committing to a discovery workshop. It should take the customer's platform lead 20–30 minutes to fill in and gives you the signal to qualify in or out.
+
+## Inputs you need from the customer
+
+| # | Input | Source | Format |
+|---|---|---|---|
+| 1 | Platform lead contact | Customer | Email |
+| 2 | Org structure (number of teams / repos) | Customer | Numbers |
+| 3 | Security baseline expectations | Customer | Narrative |
+| 4 | AI usage policy (current) | Customer | Narrative |
+
+## Step-by-step
+
+The following sequence runs the qualification end-to-end.
+
+<Steps>
+1. Send the customer the downloadable Word questionnaire.
+2. Give them a week. Follow up if no response in 5 business days.
+3. Schedule a 30-minute scoring call once they return it.
+4. Score against the rubric (below) and recommend qualify-in or qualify-out.
+5. If qualify-in, share the discovery workshop kit.
+</Steps>
+
+## Questionnaire sections
+
+The questionnaire is structured across the eight sections below.
+
+| # | Section | Sample questions |
+|---|---|---|
+| 1 | Today's SCM | What is your primary SCM? Any secondary systems? Plans to consolidate? |
+| 2 | Today's CI/CD | Pipelines per team? Avg. green-build rate? Avg. PR cycle time? |
+| 3 | Identity & access | Entra ID or other? EMU in use? Audit log streaming? |
+| 4 | Security posture | GHAS enabled? Secret scanning findings open? Dependabot in place? |
+| 5 | AI policy | Copilot allowed? Approved models? Approved data classes? |
+| 6 | Developer environments | Dev Box / Codespaces in use? Local-only? Restricted? |
+| 7 | Migration appetite | ADO → GitHub on the roadmap? Timeline? Owner? |
+| 8 | Outcomes wanted | Top 3 business outcomes in priority order |
+
+## Output: customer-ready deliverable
+
+The completed questionnaire plus a one-page qualification scorecard (Go / Defer / No-go) with the rationale.
+
+<Aside type="tip" title="Download the workfile">
+  <a href={`${import.meta.env.BASE_URL}templates/engagement/qualification-questionnaire.docx`}>📄 Download the Qualification Questionnaire (DOCX)</a>
+</Aside>
+
+## Qualification rubric
+
+Score each of the eight sections 0–3 (0 = blocker, 3 = ready). Sum the scores.
+
+| Score | Recommendation |
+|---|---|
+| 0–8 | No-go — fundamental gaps, not a fit for a 6–12 week engagement |
+| 9–16 | Defer — surface gaps to PDM, propose a shorter readiness sprint first |
+| 17–24 | Go — proceed to discovery workshop |
+
+## Reuse & contribute back
+
+<Aside type="tip">
+  Found a question that always gets the same answer, or one you wish you'd asked
+  on the last engagement? PR `qualification-questionnaire.mdx` and the DOCX in
+  `public/templates/engagement/`. Use the `template-improvement` issue template.
+</Aside>

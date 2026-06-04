@@ -1,0 +1,70 @@
+---
+title: "Innersource – Contributing"
+description: How to contribute to the Agentic DevOps specialization repo — branch policy, commit conventions, PR review SLA, evidence handling.
+sidebar:
+  label: "Contributing"
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This page is the site-rendered version of [`CONTRIBUTING.md`](https://github.com/NikoMix/specialization-agentic-devops/blob/main/CONTRIBUTING.md). When the two disagree, the markdown file in the repo root wins.
+
+## Who can contribute
+
+Anyone in the practice. The audience is partner consultants delivering Agentic DevOps engagements — not customers. Engagement artefacts (customer names, secrets, customer IP) must **never** be checked in. See "Evidence handling" below.
+
+## Branch policy
+
+This repo commits **directly to `main`**. There is no `develop` branch and no long-lived feature branches. For larger changes, use a short-lived topic branch and PR back into `main`.
+
+## Commit conventions
+
+Conventional Commits — `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`. Include the Copilot co-author trailer:
+
+```
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+```
+
+## PR review SLA
+
+| PR type | First review |
+|---|---|
+| Typo / link fix | Next business day |
+| Content improvement | 3 business days |
+| New page / template | 5 business days |
+| Architectural change | 10 business days |
+
+CODEOWNERS auto-assigns reviewers. See [`CODEOWNERS`](https://github.com/NikoMix/specialization-agentic-devops/blob/main/CODEOWNERS).
+
+## Evidence handling
+
+When porting a lesson learned, anonymise:
+
+- Replace customer name with `Customer A`, `Customer B`, etc.
+- Strip URLs, account IDs, subscription IDs, tenant IDs.
+- Remove screenshots that contain identifying chrome.
+- Never check in customer source code, customer telemetry, or secrets.
+
+If in doubt, **don't** check it in — open an issue describing the lesson abstractly and discuss in the issue thread.
+
+## Local development
+
+```powershell
+npm install
+npm run dev
+```
+
+Then open http://localhost:4321/specialization-agentic-devops/.
+
+Build locally before opening a PR:
+
+```powershell
+npm run build
+```
+
+<Aside type="caution" title="MDX gotchas">
+  Read `.github/memories/mdx-content.md` before authoring new pages. It captures
+  the table formatting rules, escape rules, Starlight component requirements,
+  and the JSX-anchor pattern for download links.
+</Aside>

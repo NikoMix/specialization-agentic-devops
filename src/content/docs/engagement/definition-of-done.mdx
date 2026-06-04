@@ -1,0 +1,71 @@
+---
+title: "Engagement Playbook – Definition of Done"
+description: Per-deliverable acceptance criteria + customer sign-off checklist for an Agentic DevOps engagement.
+sidebar:
+  label: "Definition of Done"
+  order: 8
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+## When to use this
+
+Agree the Definition of Done at the **end of discovery**, before scope-locking the engagement. Re-confirm during hypercare exit. The DoD is the gate the customer signs to close the engagement and trigger the final invoice.
+
+## Inputs you need from the customer
+
+| # | Input | Source | Format |
+|---|---|---|---|
+| 1 | Signed engagement plan | Customer | PDF |
+| 2 | Customer-side acceptance criteria | Customer | Free text |
+
+## Step-by-step
+
+The following sequence locks the DoD before delivery starts and re-uses it at engagement close.
+
+<Steps>
+1. Download the DoD template (DOCX).
+2. Tailor the per-deliverable acceptance criteria to the customer's scope.
+3. Review with the customer's sponsor; secure verbal agreement.
+4. Both parties sign the DoD before pilot kick-off.
+5. At engagement close, re-walk the DoD with the customer and capture sign-off per row.
+</Steps>
+
+## Per-deliverable acceptance criteria
+
+| Deliverable | "Done" means |
+|---|---|
+| Discovery report + scorecard | Customer sponsor has reviewed and acknowledged in writing |
+| HLD | Reviewed by customer architect; no open major issues |
+| LLD | Includes all per-repo / per-team configuration; CODEOWNER mapping signed off |
+| Pilot team enablement | Pilot team passes the success metrics for 2 consecutive sprints |
+| Scale-out (3–5 teams) | All teams on the new platform; baseline metrics improved or held |
+| Runbook | Tested via a dry-run incident; customer platform team can execute without partner help |
+| KT plan | Customer team passes a 1-hour skills check on each module |
+| Hypercare plan | 30/60/90 SLOs achieved or formally accepted with deviation notes |
+
+## Engagement-level DoD
+
+The engagement as a whole is done when every row below is true.
+
+- [ ] All deliverables in the engagement plan accepted
+- [ ] All success metrics either met or formally accepted with deviation notes
+- [ ] All open risks / actions transferred to the customer's backlog
+- [ ] Customer sponsor has signed the DoD document
+- [ ] Final invoice raised
+- [ ] Lessons-learned issue opened in this repo
+
+## Output: customer-ready deliverable
+
+A signed DoD document, archived under the engagement folder.
+
+<Aside type="tip" title="Download the workfile">
+  <a href={`${import.meta.env.BASE_URL}templates/engagement/definition-of-done.docx`}>📄 Download the Definition of Done (DOCX)</a>
+</Aside>
+
+## Reuse & contribute back
+
+<Aside type="tip">
+  Adjust the DoD as the offering matures. Capture lessons via the
+  `lesson-learned` issue template.
+</Aside>

@@ -1,0 +1,69 @@
+---
+title: "Deliverable Template – Runbook"
+description: Runbook template for the platform team operating the Agentic DevOps platform — token rotation, runner scaling, Copilot exception handling, agent incident response.
+sidebar:
+  label: "Runbook Template"
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+## When to use this
+
+The runbook is for the **customer's platform team** that operates the platform after engagement close. It must be tested via a dry-run incident before sign-off (per the [Definition of Done](../../definition-of-done/)).
+
+## Inputs you need
+
+- Signed LLD
+- On-call rota
+- Incident severity rubric (customer's existing scheme)
+
+## Step-by-step
+
+The following sequence drives the runbook from blank to dry-run-tested sign-off.
+
+<Steps>
+1. Download the DOCX template.
+2. Fill one section per recurring operational task.
+3. Fill one section per incident type (with severity guidance).
+4. Run a dry-run incident with the customer platform team; capture gaps.
+5. Iterate to sign-off.
+</Steps>
+
+## Operational procedures (recurring)
+
+| § | Procedure | Cadence |
+|---|---|---|
+| 1 | OIDC federated credential review | Quarterly |
+| 2 | Self-hosted runner image patching | Monthly |
+| 3 | ARC controller upgrade | Quarterly |
+| 4 | Copilot license review (active vs. inactive seats) | Quarterly |
+| 5 | GHAS alert review (high severity) | Weekly |
+| 6 | Branch protection audit | Monthly |
+| 7 | Audit log integrity check | Monthly |
+| 8 | MCP server token rotation | Per server policy (90 days default) |
+
+## Incident response
+
+| Incident type | Severity guidance | First responder action |
+|---|---|---|
+| GitHub Actions outage | Defer to GitHub status page; do not page secondary | Comms only |
+| Self-hosted runner pool exhausted | Sev 3 | Scale ARC pool; investigate root cause |
+| GHAS secret leak (push protection bypass) | Sev 1 | Rotate secret immediately; revoke in source system; open incident |
+| Copilot coding agent misbehaviour (unwanted commits) | Sev 2 | Disable agent on affected repos; revert offending commits; review prompt |
+| MCP server unreachable | Sev 2 | Failover to backup; degrade gracefully if defined |
+| OIDC trust broken (deploy failures) | Sev 2 | Re-create federated credential; verify subject claim |
+
+## Output: customer-ready deliverable
+
+A signed runbook (DOCX or wiki form), tested via dry-run.
+
+<Aside type="tip" title="Download the workfile">
+  <a href={`${import.meta.env.BASE_URL}templates/deliverables/runbook-template.docx`}>📄 Download the Runbook template (DOCX)</a>
+</Aside>
+
+## Reuse & contribute back
+
+<Aside type="tip">
+  Capture new incident patterns from real engagements via `lesson-learned`.
+</Aside>

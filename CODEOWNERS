@@ -1,0 +1,22 @@
+# CODEOWNERS for specialization-agentic-devops
+#
+# Practice leads are listed per content area. Replace the @-handles below with
+# the actual GitHub usernames for your practice when you fork this repo.
+
+# Default — practice lead for the whole repository
+*                                       @NikoMix
+
+# Audit content (Module A + Module B)
+/src/content/docs/module-a/             @NikoMix
+/src/content/docs/module-b/             @NikoMix
+
+# Engagement playbook
+/src/content/docs/engagement/           @NikoMix
+
+# Innersource governance + roadmap
+/src/content/docs/innersource/          @NikoMix
+/CONTRIBUTING.md                        @NikoMix
+/CODEOWNERS                             @NikoMix
+
+# Workflows, scripts, and the Copilot agent definition
+/.github/                               @NikoMix
