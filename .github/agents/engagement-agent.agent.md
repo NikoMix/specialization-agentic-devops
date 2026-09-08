@@ -150,7 +150,7 @@ Before turning on any agent / MCP server in a customer environment:
 
 1. Search for open GitHub Issues in this repository — each open issue represents either an audit control or an engagement deliverable.
 2. Check the issue labels: blockers (insurance, ACR gaps, expired certs) always take priority. After blockers, prefer `module-a` controls before `module-b`.
-3. Read the corresponding documentation page in `src/content/docs/module-a/`, `src/content/docs/module-b/`, or `src/content/docs/engagement/`.
+3. Read the corresponding documentation page in `content/docs/module-a/`, `content/docs/module-b/`, or `content/docs/engagement/`.
 4. Tell the consultant exactly what to do next.
 
 ---

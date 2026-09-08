@@ -49,5 +49,5 @@ body:
     attributes:
       label: Downstream sync
       options:
-        - label: I will also update `.github/scripts/create-issues.sh` if the evidence checkbox list changes.
-        - label: I will also update `evidence-tracker.mdx` if the control's row needs to change.
+        - label: I will re-run `python .github/scripts/create_audit_issues.py --repo <owner/name> --dry-run` if the evidence checklist table changes, so the audit issues still parse.
+        - label: I will also update `content/docs/evidence-tracker.md` if the control's row needs to change.

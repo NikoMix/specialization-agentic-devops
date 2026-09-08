@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true" focusable="false">
+  <title>Agentic DevOps</title>
+  <!-- Continuous delivery loop: four arcs closing a cycle, with the agent at its centre. -->
+  <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M10 2.6a7.4 7.4 0 0 1 6.4 3.7"/>
+    <path d="M17.4 9.3A7.4 7.4 0 0 1 10 17.4"/>
+    <path d="M10 17.4a7.4 7.4 0 0 1-6.4-3.7"/>
+    <path d="M2.6 10.7A7.4 7.4 0 0 1 10 2.6"/>
+  </g>
+  <circle cx="10" cy="10" r="3.1" fill="currentColor"/>
+</svg>

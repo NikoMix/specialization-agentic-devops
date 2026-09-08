@@ -1,7 +1,14 @@
 name: Copilot Setup Steps
 
+# Pre-installs the toolchain the coding agent needs to build and validate the
+# site: Hugo extended, the pinned theme submodule, and Python for the two
+# repository scripts.
+
 on:
   workflow_dispatch:
+
+env:
+  HUGO_VERSION: 0.165.0
 
 jobs:
   copilot-setup-steps:
@@ -9,9 +16,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
         with:
-          node-version: 24
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Install Hugo (extended)
+        run: |
+          curl -sSL -o hugo.deb \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i hugo.deb
+          hugo version
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"

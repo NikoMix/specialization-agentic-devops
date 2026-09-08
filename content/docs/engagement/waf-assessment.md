@@ -1,0 +1,74 @@
+---
+title: "Engagement Playbook – WAF Assessment (Operational Excellence + Security focus)"
+description: "WAF lens tailored to Operational Excellence + Security pillars with Agentic DevOps-specific questions and a scoring rubric."
+linkTitle: "WAF Assessment"
+weight: 40
+---
+
+## When to use this
+
+Run the WAF assessment during the discovery workshop's Day 1 afternoon and Day 2 morning. For Agentic DevOps, the **primary** pillars are Operational Excellence and Security. Reliability and Cost Optimization are **secondary**. The Performance Efficiency pillar is generally out of scope for an SDLC engagement.
+
+## Inputs you need from the customer
+
+| # | Input | Source | Format |
+|---|---|---|---|
+| 1 | Read-only admin access to GHEC / ADO | Customer | Invite |
+| 2 | Pipeline metrics (last 30 days) | Customer | CSV / XLSX |
+| 3 | GHAS findings export | Customer | CSV |
+| 4 | Existing WAF assessments (if any) | Customer | XLSX |
+
+## Step-by-step
+
+The following sequence runs the assessment from kickoff to scorecard hand-back.
+
+1. Send the customer the XLSX workbook with one tab per WAF pillar.
+2. Walk through the Operational Excellence tab live (60 min) — score each question 1–5.
+3. Walk through the Security tab live (60 min) — score each question 1–5.
+4. Self-serve scoring for Reliability + Cost Optimization (homework, 30 min).
+5. Calculate radar chart and pillar totals.
+6. Hand back the scorecard with the top 5 prioritised improvements.
+
+## Operational Excellence questions (sample)
+
+| # | Question | Scoring (1 = poor, 5 = excellent) |
+|---|---|---|
+| OE.1 | Is every change deployable via a pipeline? | 1: manual; 5: zero manual gates after merge |
+| OE.2 | What is the median PR cycle time? | 1: &gt; 5 days; 5: &lt; 1 day |
+| OE.3 | Is observability for the SDLC itself (build, deploy, test) in place? | 1: nothing; 5: dashboards + alerts |
+| OE.4 | Are runbooks documented and tested? | 1: tribal; 5: tested per quarter |
+| OE.5 | Is incident retro a standing practice? | 1: never; 5: every incident, actions tracked |
+
+## Security questions (sample)
+
+| # | Question | Scoring (1 = poor, 5 = excellent) |
+|---|---|---|
+| SEC.1 | Is branch protection enforced on `main` for all repos? | 1: never; 5: all repos, no exceptions |
+| SEC.2 | Are secrets stored in Key Vault and pulled via OIDC? | 1: PATs in repo secrets; 5: workload identity only |
+| SEC.3 | Is GHAS code scanning enabled with severity gating? | 1: off; 5: high-severity blocks merge |
+| SEC.4 | Is supply chain provenance signed (e.g., `attest-build-provenance`)? | 1: no; 5: yes, verified at deploy |
+| SEC.5 | Is agent / Copilot access scoped to minimum required tools? | 1: no scoping; 5: per-repo, read-default |
+
+## Reliability + Cost questions (secondary, sample)
+
+| # | Question |
+|---|---|
+| REL.1 | Are runner pools sized for peak with auto-scaling? |
+| REL.2 | Are pipeline retries idempotent? |
+| COST.1 | Are runner minute costs tracked per team? |
+| COST.2 | Are Copilot seats reviewed quarterly for active use? |
+
+## Output: customer-ready deliverable
+
+A WAF scorecard XLSX with one tab per pillar, an aggregated radar chart, and a prioritised top-5 improvement list with effort and owner.
+
+{{< alert type="tip" title="Download the workfile" >}}
+{{< button href="templates/engagement/waf-assessment.xlsx" variant="outline" icon="grid" >}}Download the WAF Assessment workbook (XLSX){{< /button >}} — one tab per pillar, scoring + chart wired up.
+{{< /alert >}}
+
+## Reuse & contribute back
+
+{{% alert type="tip" %}}
+PR new questions or rubric tweaks via `template-improvement`. Lessons learned
+from customer engagements that change scoring nuance go in `lesson-learned`.
+{{% /alert %}}

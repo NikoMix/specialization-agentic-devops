@@ -1,0 +1,261 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Agentic DevOps – Advanced Specialization
+#
+# Static site built with Hugo (extended) and the remote NikoMix/ms-hugo-theme
+# theme. See .github/workflows/deploy.yml.
+#
+# The theme is consumed as a git submodule (themes/ms-hugo-theme) rather than a
+# Hugo Module. Go's module packaging strips every directory named `vendor`, and
+# the theme keeps its Chroma syntax-highlighting partial at
+# assets/scss/vendor/_chroma.scss — so `@import "vendor/chroma"` in the theme's
+# main.scss cannot resolve when it is imported as a Hugo Module. Tracked
+# upstream at https://github.com/NikoMix/ms-hugo-theme/issues/1; once the
+# directory is renamed this can move to [module.imports].
+# ─────────────────────────────────────────────────────────────────────────────
+
+baseURL = "https://nikomix.github.io/specialization-agentic-devops/"
+title = "Agentic DevOps – Advanced Specialization"
+theme = "ms-hugo-theme"
+
+locale = "en-GB"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+enableRobotsTXT = true
+# Uses the file's last git commit time for .Lastmod. Requires fetch-depth: 0.
+enableGitInfo = true
+
+[pagination]
+  pagerSize = 30
+
+[outputs]
+  home = ["html", "rss"]
+  section = ["html"]
+
+# ─── Markup ──────────────────────────────────────────────────────────────────
+# Tables are the primary content type in this toolkit (evidence checklists,
+# status trackers, gap analyses), so the GFM table extension is explicitly on
+# and the theme's layouts/_markup/render-table.html hook wraps every one of
+# them in a scrollable, keyboard-reachable region.
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      wrapStandAloneImageWithinParagraph = false
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+    [markup.goldmark.renderer]
+      unsafe = true
+      hardWraps = false
+    [markup.goldmark.extensions]
+      table = true
+      strikethrough = true
+      linkify = true
+      taskList = true
+      typographer = false
+
+  [markup.highlight]
+    # Required by the theme: Chroma token classes are mapped onto its colour
+    # tokens, so syntax highlighting follows the light and dark themes.
+    noClasses = false
+    lineNumbersInTable = true
+    lineNos = false
+    tabWidth = 2
+    guessSyntax = true
+    codeFences = true
+
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
+[minify]
+  disableXML = true
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# ─── Theme parameters ────────────────────────────────────────────────────────
+[params]
+  brand = "Agentic DevOps"
+  product = "Advanced Specialization"
+  tagline = "Partner enablement toolkit"
+  description = "Partner enablement toolkit for the Agentic DevOps Advanced Specialization audit and customer engagement lifecycle."
+  keywords = ["agentic devops", "github", "azure", "advanced specialization", "audit", "partner"]
+  # The theme's bundled four-square mark is a Microsoft-style placeholder, and
+  # its own README says to replace it before publishing. `brandLogo` points the
+  # header at our own mark instead. (`showBrandLogo` is documented by the theme
+  # but its brand partial ignores it, so it is not relied on here.)
+  brandLogo = "svg/brand/agentic-devops.svg"
+  colorScheme = "auto"
+  showThemeToggle = true
+  dateFormat = ":date_long"
+
+  [params.header]
+    sticky = true
+    showSearch = true
+    showLanguageSwitcher = false
+
+  [params.breadcrumbs]
+    enable = true
+    showCurrent = true
+
+  [params.page]
+    showDate = false
+    showLastmod = true
+    showReadingTime = true
+    showAuthor = false
+    showTaxonomies = false
+    showPrevNext = true
+    showToc = true
+    tocStartLevel = 2
+    tocEndLevel = 3
+    showShare = false
+    showFeedback = true
+    showEditLink = true
+    editUrl = "https://github.com/NikoMix/specialization-agentic-devops/edit/main/content"
+    relatedCount = 3
+
+  [params.list]
+    showSummary = true
+    showThumbnail = false
+
+  [params.search]
+    enable = true
+    maxResults = 12
+
+  [params.footer]
+    showPoweredBy = false
+    showThemeToggle = true
+    copyright = "Community partner enablement toolkit. Not a Microsoft or GitHub publication. Microsoft, Azure, GitHub and Fluent are trademarks of their respective owners."
+
+  [params.seo]
+    openGraph = true
+    twitterCards = true
+    schema = true
+
+  [params.build]
+    transpiler = "auto"
+    sourceMap = true
+
+  [params.banner]
+    enable = true
+    text = "Draft content — thresholds, pillars and control numbering are based on the closest published guidance. Confirm every figure with your PDM."
+    icon = "warning"
+    dismissible = true
+    key = "draft-2026"
+
+# ─── Navigation ──────────────────────────────────────────────────────────────
+[menus]
+  [[menus.main]]
+    name = "Overview"
+    pageRef = "/docs/overview"
+    weight = 10
+
+  [[menus.main]]
+    name = "Requirements"
+    pageRef = "/docs/requirements"
+    weight = 20
+
+  [[menus.main]]
+    name = "Audit"
+    weight = 30
+
+    [[menus.main]]
+      parent = "Audit"
+      name = "Audit process"
+      pageRef = "/docs/audit-process"
+      weight = 10
+
+    [[menus.main]]
+      parent = "Audit"
+      name = "Module A – General"
+      pageRef = "/docs/module-a"
+      weight = 20
+
+    [[menus.main]]
+      parent = "Audit"
+      name = "Module B – Agentic DevOps"
+      pageRef = "/docs/module-b"
+      weight = 30
+
+    [[menus.main]]
+      parent = "Audit"
+      name = "Evidence tracker"
+      pageRef = "/docs/evidence-tracker"
+      weight = 40
+
+  [[menus.main]]
+    name = "Engagement playbook"
+    pageRef = "/docs/engagement"
+    weight = 40
+
+  [[menus.main]]
+    name = "Innersource"
+    pageRef = "/docs/innersource"
+    weight = 50
+
+  [[menus.main]]
+    name = "FAQ"
+    pageRef = "/docs/faq"
+    weight = 60
+
+  # ─── Footer link columns ───────────────────────────────────────────────────
+  [[menus.footer]]
+    name = "Audit"
+    weight = 10
+
+    [[menus.footer]]
+      parent = "Audit"
+      name = "Pre-qualification requirements"
+      pageRef = "/docs/requirements"
+
+    [[menus.footer]]
+      parent = "Audit"
+      name = "Audit process"
+      pageRef = "/docs/audit-process"
+
+    [[menus.footer]]
+      parent = "Audit"
+      name = "Evidence tracker"
+      pageRef = "/docs/evidence-tracker"
+
+  [[menus.footer]]
+    name = "Deliver"
+    weight = 20
+
+    [[menus.footer]]
+      parent = "Deliver"
+      name = "Engagement playbook"
+      pageRef = "/docs/engagement"
+
+    [[menus.footer]]
+      parent = "Deliver"
+      name = "Reference architectures"
+      pageRef = "/docs/engagement/reference-architectures"
+
+    [[menus.footer]]
+      parent = "Deliver"
+      name = "Deliverable templates"
+      pageRef = "/docs/engagement/deliverables"
+
+  [[menus.footer]]
+    name = "Contribute"
+    weight = 30
+
+    [[menus.footer]]
+      parent = "Contribute"
+      name = "Contributing"
+      pageRef = "/docs/innersource/contributing"
+
+    [[menus.footer]]
+      parent = "Contribute"
+      name = "Content governance"
+      pageRef = "/docs/innersource/content-governance"
+
+    [[menus.footer]]
+      parent = "Contribute"
+      name = "Roadmap & backlog"
+      pageRef = "/docs/innersource/roadmap"

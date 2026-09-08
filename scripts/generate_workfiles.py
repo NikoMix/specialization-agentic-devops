@@ -1,6 +1,6 @@
 """Generate downloadable workfiles for the Agentic DevOps specialization repo.
 
-Writes 14 files under public/templates/{engagement,deliverables,audit}/.
+Writes 14 files under static/templates/{engagement,deliverables,audit}/.
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.utils import get_column_letter
 
-ROOT = Path(__file__).resolve().parent.parent / "public" / "templates"
+ROOT = Path(__file__).resolve().parent.parent / "static" / "templates"
 ENG = ROOT / "engagement"
 DEL = ROOT / "deliverables"
 AUD = ROOT / "audit"

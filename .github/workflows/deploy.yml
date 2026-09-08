@@ -3,6 +3,8 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,40 +12,86 @@ permissions:
   pages: write
   id-token: write
 
+# Let a running deployment finish rather than cancelling it mid-publish.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
+
+env:
+  # Must be the extended edition: the theme compiles SCSS through Hugo's
+  # embedded Dart Sass.
+  HUGO_VERSION: 0.165.0
 
 jobs:
   build:
+    name: Build site
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - name: Checkout
+      - name: Check out
         uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
         with:
-          node-version: 24
+          # themes/ms-hugo-theme is the remote NikoMix/ms-hugo-theme template,
+          # pinned as a submodule.
+          submodules: recursive
+          # Needed for .Lastmod, because the site sets enableGitInfo.
+          fetch-depth: 0
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
+      - name: Install Hugo (extended)
+        run: |
+          curl -sSL -o hugo.deb \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i hugo.deb
+          hugo version
 
-      - name: Build site
-        run: npm run build
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        env:
+          HUGO_ENVIRONMENT: production
+        run: |
+          set -o pipefail
+          hugo \
+            --minify \
+            --gc \
+            --baseURL "${{ steps.pages.outputs.base_url }}/" \
+            2>&1 | tee hugo-build.log
+
+      - name: Fail on broken relative links
+        run: |
+          # The theme's link render hook warns (never errors) on a dead *relative*
+          # Markdown link. It says nothing about absolute ones — verify_links.py
+          # below is the real gate.
+          if grep -q "broken link" hugo-build.log; then
+            echo "::error::Hugo reported broken relative links:"
+            grep "broken link" hugo-build.log
+            exit 1
+          fi
+          echo "No broken relative links."
+
+      - name: Verify every internal link resolves
+        # Walks the built HTML, so it also covers links emitted by shortcodes.
+        # Catches both dead targets and links that omit the Pages base path.
+        run: python3 .github/scripts/verify_links.py
+
+      - name: Verify Markdown tables rendered
+        # Tables are the primary content type in this toolkit; an indented table
+        # silently degrades to a code block or to plain text.
+        run: python3 .github/scripts/verify_tables.py
 
       - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: public
 
   deploy:
+    name: Deploy to GitHub Pages
+    # A pull request build validates the site but must not publish it.
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
