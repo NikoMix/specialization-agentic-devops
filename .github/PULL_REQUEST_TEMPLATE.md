@@ -24,8 +24,9 @@
 
 ## Checklist
 
-- [ ] `npm run build` passes locally
+- [ ] `hugo --minify --gc` passes locally with no broken-link warnings
+- [ ] `python .github/scripts/verify_tables.py` passes
 - [ ] No real customer names, contract values, or identifiable engagement detail in this PR
 - [ ] If evidence requirements changed, `.github/scripts/create-issues.sh` updated to match
-- [ ] If a Module A/B control page changed, the matching entry in `evidence-tracker.mdx` still aligns
+- [ ] If a Module A/B control page changed, the matching entry in `content/docs/evidence-tracker.md` still aligns
 - [ ] Linked issue: closes #

@@ -1,0 +1,5 @@
+// Project stylesheet overrides.
+//
+// The theme imports this file last, so anything here wins over its own rules.
+// To override design tokens instead, create assets/scss/_custom-tokens.scss,
+// which is imported before the component styles consume them.

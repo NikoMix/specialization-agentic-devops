@@ -1,0 +1,105 @@
+---
+title: "Evidence Tracker"
+description: "Master checklist to track evidence collection status across all Module A and Module B controls for the Agentic DevOps Advanced Specialization."
+weight: 100
+---
+
+{{< alert type="tip" title="Download the workfile" >}}
+Prefer a spreadsheet? {{< button href="templates/audit/evidence-tracker.xlsx" variant="outline" icon="grid" >}}Download the Evidence Tracker (XLSX){{< /button >}} — one tab per module, status dropdowns wired up.
+{{< /alert >}}
+
+The table below is the in-repo mirror of the downloadable evidence tracker. Update either form to suit your team's workflow.
+
+## Status Legend
+
+| Symbol | Meaning |
+|---|---|
+| ⬜ | Not started |
+| 🔵 | In progress |
+| ✅ | Complete – evidence ready |
+| ❌ | Blocked / gap identified |
+| ⚠️ | Submitted – awaiting auditor confirmation |
+
+---
+
+## Module A – General Requirements
+
+| Control | Description | Owner | Due Date | Status | Notes |
+|---|---|---|---|---|---|
+| A.1.1 | Organisational Data | | | ⬜ | |
+| A.1.2 | Financial Documentation | | | ⬜ | |
+| A.2.1 | Service Delivery Methodology | | | ⬜ | |
+| A.2.2 | Quality Management | | | ⬜ | |
+| A.3.1 | Customer Satisfaction | | | ⬜ | |
+| A.3.2 | Complaint Handling | | | ⬜ | |
+| A.3.3 | Security & Privacy | | | ⬜ | |
+
+---
+
+## Module B – Agentic DevOps
+
+| Control | Description | Owner | Due Date | Status | Notes |
+|---|---|---|---|---|---|
+| B.1.1 | Agentic DevOps Implementation Capability | | | ⬜ | |
+| B.2.1 | ACR Performance – Two Pillars (draft) | | | ⬜ | |
+| B.2.2 | Customer Diversity (≥ 3 unique customers) | | | ⬜ | |
+| B.3.1 | Certifications Mapping | | | ⬜ | |
+| B.4.1 | Audit Readiness | | | ⬜ | |
+| B.4.2 | Partner Onboarding Assets | | | ⬜ | |
+
+---
+
+## Pre-Qualification Gate
+
+| Item | Owner | Status | Notes |
+|---|---|---|---|
+| Active Solutions Partner designation confirmed | | ⬜ | |
+| ACR Pillar 1 – App Platform + GitHub ≥ $15K | | ⬜ | |
+| ACR Pillar 2 – Azure DevOps + Pipelines ≥ $15K | | ⬜ | |
+| ≥ 3 unique customers contributing ACR | | ⬜ | |
+| AZ-400 (≥ 1 holder) | | ⬜ | |
+| GitHub Actions cert (≥ 1 holder) | | ⬜ | |
+| GitHub Advanced Security cert (≥ 1 holder) | | ⬜ | |
+| GitHub Copilot cert (≥ 1 holder) | | ⬜ | |
+| Total certified individuals ≥ 5 | | ⬜ | |
+| Audit requested via Partner Center | | ⬜ | |
+
+---
+
+## Certification Holders Mapping
+
+| Individual Name | Role | AZ-400 | GH Actions | GHAS | GH Copilot | Expiry |
+|---|---|:---:|:---:|:---:|:---:|---|
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+
+> Add rows as needed. ✅ = holds cert, ⬜ = does not hold.
+
+---
+
+## ACR Summary
+
+| Pillar | Services | 3-Month ACR | Target | Unique Customers | Status |
+|---|---|---|---|---|---|
+| App Platform + GitHub | App Service, AKS, ACA, Functions, GitHub, GHAS, Copilot | $0 | $15,000 | 0 | ⬜ |
+| Azure DevOps + Pipelines | ADO Services, hosted minutes, runner VMs / VMSS / AKS | $0 | $15,000 | 0 | ⬜ |
+| **Combined unique customers** | | | **≥ 3** | 0 | ⬜ |
+
+---
+
+## Evidence Submission Log
+
+| Date | Control | Document Name | Version | Submitted to | Confirmation Received |
+|---|---|---|---|---|---|
+| | | | | | |
+
+---
+
+## Auditor Queries & Responses
+
+| Date Received | Control | Query | Response | Date Resolved |
+|---|---|---|---|---|
+| | | | | |

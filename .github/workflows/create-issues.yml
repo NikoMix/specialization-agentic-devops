@@ -1,8 +1,34 @@
 name: Create Audit Engagement Issues
 
+# Opens the full issue set for an audit cycle: the pre-qualification gate, one
+# issue per Module A and Module B control, and one issue per Module B evidence
+# item. The set is derived from content/docs/ so it always matches the published
+# audit guide, and re-runs skip anything that already exists.
+
 on:
   workflow_dispatch:
+    inputs:
+      year:
+        description: "Audit cycle year (blank = current year)"
+        required: false
+        type: string
+      scope:
+        description: "Which issues to create"
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - pre-qualification
+          - module-a
+          - module-b
+      dry_run:
+        description: "List the issues without creating them"
+        required: false
+        default: false
+        type: boolean
   schedule:
+    # 09:00 UTC on 1 March — start of the annual audit cycle.
     - cron: "0 9 1 3 *"
 
 permissions:
@@ -11,57 +37,30 @@ permissions:
 
 jobs:
   create-issues:
+    name: Create issues
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Check out
         uses: actions/checkout@v4
 
-      - name: Determine audit cycle year
-        id: cycle
-        run: |
-          YEAR=$(date -u +%Y)
-          echo "year=$YEAR"        >> "$GITHUB_OUTPUT"
-          echo "label=audit-$YEAR" >> "$GITHUB_OUTPUT"
-          echo "milestone=Audit $YEAR" >> "$GITHUB_OUTPUT"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: Create labels
+      - name: Create audit issues
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh label create "pre-qualification"   --color "0e8a16" --description "Pre-qualification gate"             --repo "$GITHUB_REPOSITORY" --force
-          gh label create "module-a"            --color "e4e669" --description "Module A – General Requirements"   --repo "$GITHUB_REPOSITORY" --force
-          gh label create "module-b"            --color "d73a4a" --description "Module B – Agentic DevOps Specific" --repo "$GITHUB_REPOSITORY" --force
-          gh label create "innersource"         --color "8a2be2" --description "Innersource contribution"           --repo "$GITHUB_REPOSITORY" --force
-          gh label create "engagement-playbook" --color "1d76db" --description "Engagement playbook content"        --repo "$GITHUB_REPOSITORY" --force
-          gh label create "${{ steps.cycle.outputs.label }}" --color "0075ca" \
-            --description "Audit cycle ${{ steps.cycle.outputs.year }}" \
-            --repo "$GITHUB_REPOSITORY" --force
-
-      - name: Create or find milestone
-        id: milestone
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_YEAR: ${{ inputs.year }}
+          INPUT_SCOPE: ${{ inputs.scope || 'all' }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
-          TITLE="${{ steps.cycle.outputs.milestone }}"
-          DUE="${{ steps.cycle.outputs.year }}-06-30T00:00:00Z"
-          NUMBER=$(gh api "repos/$GITHUB_REPOSITORY/milestones?state=all&per_page=100" \
-            --jq "[.[] | select(.title == \"$TITLE\")][0].number // empty")
-          if [ -z "$NUMBER" ]; then
-            NUMBER=$(gh api "repos/$GITHUB_REPOSITORY/milestones" \
-              --method POST \
-              --field title="$TITLE" \
-              --field due_on="$DUE" \
-              --field description="Agentic DevOps Advanced Specialization – ${{ steps.cycle.outputs.year }} audit cycle" \
-              --jq ".number")
+          args=(--repo "$GITHUB_REPOSITORY" --scope "$INPUT_SCOPE")
+          if [ -n "${INPUT_YEAR:-}" ]; then
+            args+=(--year "$INPUT_YEAR")
           fi
-          echo "number=$NUMBER" >> "$GITHUB_OUTPUT"
-          echo "title=$TITLE"   >> "$GITHUB_OUTPUT"
-
-      - name: Create issues
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYCLE_LABEL: ${{ steps.cycle.outputs.label }}
-          MILESTONE: ${{ steps.milestone.outputs.title }}
-          REPO: ${{ github.repository }}
-        run: bash .github/scripts/create-issues.sh
+          if [ "${INPUT_DRY_RUN:-false}" = "true" ]; then
+            args+=(--dry-run)
+          fi
+          python .github/scripts/create_audit_issues.py "${args[@]}"

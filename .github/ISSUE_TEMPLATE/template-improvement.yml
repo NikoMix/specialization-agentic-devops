@@ -44,4 +44,4 @@ body:
     attributes:
       label: Downstream sync
       options:
-        - label: I will also update the matching MDX page in `src/content/docs/engagement/` so the download link and the on-page guidance stay aligned.
+        - label: I will also update the matching page in `content/docs/engagement/` so the download link and the on-page guidance stay aligned.

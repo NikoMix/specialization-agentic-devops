@@ -7,16 +7,21 @@
 *                                       @NikoMix
 
 # Audit content (Module A + Module B)
-/src/content/docs/module-a/             @NikoMix
-/src/content/docs/module-b/             @NikoMix
+/content/docs/module-a/             @NikoMix
+/content/docs/module-b/             @NikoMix
 
 # Engagement playbook
-/src/content/docs/engagement/           @NikoMix
+/content/docs/engagement/           @NikoMix
 
 # Innersource governance + roadmap
-/src/content/docs/innersource/          @NikoMix
+/content/docs/innersource/          @NikoMix
 /CONTRIBUTING.md                        @NikoMix
 /CODEOWNERS                             @NikoMix
+
+# Site build: Hugo configuration and the pinned remote theme submodule
+/hugo.toml                              @NikoMix
+/.gitmodules                            @NikoMix
+/themes/                                @NikoMix
 
 # Workflows, scripts, and the Copilot agent definition
 /.github/                               @NikoMix

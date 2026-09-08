@@ -34,13 +34,23 @@ Be specific, evidence-based, and respectful. Anonymise customer data before shar
 
 ## Local development
 
+The site is built with [Hugo](https://gohugo.io/) **extended** v0.165.0 or newer and the [`NikoMix/ms-hugo-theme`](https://github.com/NikoMix/ms-hugo-theme) theme, pinned as a git submodule under `themes/`.
+
 ```bash
-npm install
-npm run dev      # http://localhost:4321/<repo>/
-npm run build    # validate before opening a PR
+git clone --recurse-submodules https://github.com/NikoMix/specialization-agentic-devops.git
+hugo server      # http://localhost:1313/<repo>/
 ```
 
-Every PR must pass `npm run build` locally **and** in CI. The MDX rules in `.github/memories/mdx-content.md` are not optional — they exist because Astro 6 / MDX 3 has strict parsing.
+In an existing clone: `git submodule update --init --recursive`.
+
+Every PR must pass both of these locally **and** in CI:
+
+```bash
+hugo --minify --gc                        # fails on a broken internal link
+python .github/scripts/verify_tables.py   # every Markdown table reached the HTML
+```
+
+The content rules in `.github/memories/hugo-content.md` are not optional. The most important one: **a Markdown table must start at column 0.** Indented four spaces it becomes a code block; indented inside a shortcode it stops being a table at all. `verify_tables.py` exists to catch exactly this.
 
 ## Innersource lifecycle
 
@@ -53,7 +63,7 @@ Every page on the site is tagged with a lifecycle status:
 | Endorsed | Used on ≥ 1 paid engagement and updated with lessons learned | Practice lead |
 | Deprecated | Superseded; kept for history | Practice lead |
 
-See [`src/content/docs/innersource/content-governance.mdx`](src/content/docs/innersource/content-governance.mdx) for the full governance model.
+See [`content/docs/innersource/content-governance.md`](content/docs/innersource/content-governance.md) for the full governance model.
 
 ---
 

@@ -30,9 +30,9 @@ This repo is a **GitHub Template**. Click **"Use this template"** (not Fork) to 
 
 Click **Use this template → Create a new repository** and choose your GitHub organisation.
 
-### 2. Set your site URL (optional)
+### 2. Set your site URL
 
-The site URL is derived from `GITHUB_REPOSITORY` automatically. If you want to host on a custom domain or `<owner>.github.io` page, add a **repository variable** `ASTRO_SITE` under **Settings → Secrets and variables → Actions → Variables**.
+Set `baseURL` in [`hugo.toml`](hugo.toml) to your published address. The deploy workflow overrides it at build time with the URL that GitHub Pages reports, so this only matters for local builds and for a custom domain.
 
 ### 3. Enable GitHub Pages
 
@@ -40,13 +40,22 @@ Go to **Settings → Pages → Source** → select **GitHub Actions**.
 
 ### 4. Create the engagement issues
 
-Go to **Actions → Create Audit Engagement Issues → Run workflow**. This creates one issue per control plus a pre-qualification gate issue, labelled and grouped under an annual milestone.
+Go to **Actions → Create Audit Engagement Issues → Run workflow**. It opens **43 issues** for the cycle:
+
+| Issues | Scope |
+|---:|---|
+| 1 | Pre-qualification gate, built from the Quick Readiness Checklist |
+| 7 | One per Module A control (A.1.1 – A.3.3) |
+| 6 | One per Module B control (B.1.1 – B.4.2) |
+| 29 | One per **Module B evidence item**, linked back to its control issue |
+
+All of them are labelled, grouped under an annual milestone, and derived from the pages in `content/docs/` — so they cannot drift from the guide. Re-running skips anything that already exists. Use the `scope` and `dry_run` inputs to preview or to open just one module.
 
 ### 5. Done
 
 - Issues appear as your engagement task board 📋
 - The documentation site deploys automatically on push to `main` 🌐
-- Downloadable workfiles (Word, PowerPoint, Excel) live under `public/templates/` and are linked from each engagement playbook page
+- Downloadable workfiles (Word, PowerPoint, Excel) live under `static/templates/` and are linked from each engagement playbook page
 - Use the Engagement Agent for guided assistance 🤖
 
 ---
@@ -74,16 +83,35 @@ The `Create Audit Engagement Issues` workflow runs automatically on a **schedule
 
 ## 🖥️ Local Development
 
-```bash
-npm install
-npm run dev
-```
-
-Build the static site with:
+The site is built with **[Hugo](https://gohugo.io/) extended v0.165.0 or newer** and the [`NikoMix/ms-hugo-theme`](https://github.com/NikoMix/ms-hugo-theme) theme, which is pinned as a git submodule under `themes/`.
 
 ```bash
-npm run build
+git clone --recurse-submodules https://github.com/NikoMix/specialization-agentic-devops.git
+cd specialization-agentic-devops
+
+hugo server        # http://localhost:1313/specialization-agentic-devops/
 ```
+
+In an existing clone that predates the submodule:
+
+```bash
+git submodule update --init --recursive
+```
+
+Validate before opening a PR — the same two commands CI runs:
+
+```bash
+hugo --minify --gc
+python .github/scripts/verify_tables.py
+```
+
+> [!NOTE]
+> The theme is consumed as a **git submodule**, not a Hugo Module, even though its
+> README recommends the latter. Go's module packaging strips every directory named
+> `vendor`, and the theme keeps its Chroma syntax-highlighting partial at
+> `assets/scss/vendor/_chroma.scss`. Imported as a Hugo Module that file is absent
+> from the module zip, and the theme's `@import "vendor/chroma"` fails the build.
+> Once the directory is renamed upstream, `hugo.toml` can move to `[module.imports]`.
 
 ---
 
@@ -94,29 +122,30 @@ npm run build
 ├── README.md
 ├── CONTRIBUTING.md
 ├── CODEOWNERS
-├── astro.config.mjs
-├── package.json
+├── hugo.toml                         # site config, menus, theme params
 ├── .github/
 │   ├── agents/engagement-agent.agent.md
-│   ├── memories/mdx-content.md
+│   ├── memories/hugo-content.md      # content authoring rules
 │   ├── ISSUE_TEMPLATE/{control-improvement,template-improvement,lesson-learned}.yml
 │   ├── PULL_REQUEST_TEMPLATE.md
-│   ├── scripts/create-issues.sh
+│   ├── scripts/create_audit_issues.py
+│   ├── scripts/verify_tables.py
 │   └── workflows/{deploy,create-issues,copilot-setup-steps}.yml
-├── public/templates/
+├── themes/ms-hugo-theme/             # submodule: NikoMix/ms-hugo-theme
+├── static/templates/
 │   ├── engagement/                   # one-pager, questionnaire, deck, workbooks, DoD
 │   ├── deliverables/                 # HLD, LLD, runbook, KT plan, hypercare plan
 │   └── audit/                        # evidence tracker, pre-qual checklist
-└── src/
-    ├── content.config.ts
-    └── content/docs/
-        ├── index.mdx / overview.mdx / requirements.mdx / audit-process.mdx
-        ├── evidence-tracker.mdx / faq.mdx
-        ├── module-a/                # A.1.1 – A.3.3 (one MDX per control)
-        ├── module-b/                # B.1.1 – B.4.2 (Agentic DevOps controls)
-        ├── engagement/              # offering, qualification, discovery, WAF, MAP, reference architectures
-        │   └── deliverables/        # HLD, LLD, runbook, KT plan, hypercare plan templates
-        └── innersource/             # contributing, content governance, roadmap
+└── content/
+    ├── _index.md                     # home page
+    └── docs/
+        ├── overview.md / requirements.md / audit-process.md
+        ├── evidence-tracker.md / faq.md
+        ├── module-a/                 # A.1.1 – A.3.3 (one page per control)
+        ├── module-b/                 # B.1.1 – B.4.2 (Agentic DevOps controls)
+        ├── engagement/               # offering, qualification, discovery, WAF, MAP, reference architectures
+        │   └── deliverables/         # HLD, LLD, runbook, KT plan, hypercare plan templates
+        └── innersource/              # contributing, content governance, roadmap
 ```
 
 ---

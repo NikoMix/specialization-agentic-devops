@@ -1,0 +1,119 @@
+---
+title: "Frequently Asked Questions"
+description: "Common questions from partners during the Agentic DevOps Advanced Specialization engagement."
+weight: 110
+---
+
+## Pre-Qualification
+
+### How do I know if we already meet the ACR thresholds?
+
+Check **Partner Center → Insights → Azure Revenue** and filter by the last 3 months. Note that Partner Center data typically lags by **2–4 weeks**, so plan accordingly. Your PDM can provide a more current view on request.
+
+### Can GitHub Copilot seats count towards ACR?
+
+GitHub Copilot Business / Enterprise revenue is included in the App Platform + GitHub pillar (draft — confirm with PDM). Standalone GitHub.com Free / Pro / Team SKUs do not count.
+
+### Can a single individual's certifications count towards the five-person minimum if they hold multiple certs?
+
+No. The requirement is **five unique individuals**, each holding at least one of the four required certifications. One person holding all four certifications counts as one individual.
+
+### Do GitHub certifications expire?
+
+GitHub certifications are valid for **2 years** and can be renewed via the GitHub Certification programme. Track expiry in the [Evidence Tracker](/docs/evidence-tracker/).
+
+---
+
+## Audit Process
+
+### How long does the audit take?
+
+For well-prepared partners, the full process from audit request to badge publication is typically **6–8 weeks**. Unprepared partners who need to gather evidence during the audit process typically take **12–16 weeks**.
+
+### What format does the auditor want evidence in?
+
+Auditors generally accept **PDF, Word, Excel, and PowerPoint** documents. Screenshots should be exported as PDF where possible. All documents should be clearly named with control references (e.g., `A.2.1_QMS_Policy_v2.pdf`).
+
+### What happens if we fail the audit?
+
+You will receive a **remediation report** itemising the specific controls and gaps. You have approximately **30 days** to address and resubmit findings. If you fail to remediate in time, you may need to restart the audit process.
+
+### Can we anonymise customer names in case studies and references?
+
+Yes, for internal audit documents. The auditor may still verify customer references directly with Microsoft Partner Center data. Work with your PDM to understand what level of anonymisation is acceptable.
+
+---
+
+## Engagement Delivery
+
+### Where do I start with a new customer?
+
+Start with the [Offering One-Pager](/docs/engagement/offering-one-pager/) to align the customer's leadership on outcomes and scope, then run the [Qualification Questionnaire](/docs/engagement/qualification-questionnaire/). If the customer qualifies, book a [Discovery Workshop](/docs/engagement/discovery-workshop/).
+
+### Which WAF pillars does Agentic DevOps focus on?
+
+**Operational Excellence** and **Security** are the primary pillars. **Reliability** and **Cost Optimization** are secondary. The downloadable [WAF Assessment workbook](/docs/engagement/waf-assessment/) has a tab per pillar so you can score each.
+
+### How do I demonstrate Copilot adoption without exposing customer code?
+
+Use **GitHub Copilot adoption metrics** (acceptance rate, suggestions accepted, PRs/dev/week trend) exported from the Copilot Business / Enterprise admin dashboard. Anonymise team names. Don't share customer source code.
+
+### What if the customer is still on Azure DevOps?
+
+Use the [Reference Architectures](/docs/engagement/reference-architectures/) page — there is a dedicated Azure DevOps → GitHub migration topology with sizing inputs. The [Engagement Agent](/docs/#engagement-agent) can size the migration if you provide the inputs.
+
+---
+
+## Evidence
+
+### What counts as proof of a customer satisfaction survey?
+
+Accepted formats include:
+
+- Exported survey results from Microsoft Forms, SurveyMonkey, or Qualtrics
+- CSAT data from your CRM (anonymised if needed)
+- Email correspondence confirming customer satisfaction scores
+- Reference letters from customers
+
+The auditor is looking for a **systematic process**, not just a one-off survey.
+
+### Do we need ISO 27001 for the security control?
+
+ISO 27001 is the gold standard and will satisfy the security control. **Equivalent evidence** is also accepted:
+
+- SOC 2 Type II report
+- Internal information security policy documented to a recognised framework (NIST, CIS)
+- Evidence that the policy is actively maintained and communicated to staff
+
+### What if a certification is expiring soon?
+
+Certifications must be **active at the time of audit submission**. If a certification expires during the audit process, have the individual renew it. Microsoft certifications typically have a **2-year validity** and can be renewed via the Microsoft Learn renewal exam (no fee).
+
+---
+
+## Innersource
+
+### Can I submit improvements from a customer engagement back into this repo?
+
+Yes — that's the point. Open a [lesson-learned issue](https://github.com/) or a PR using `.github/PULL_REQUEST_TEMPLATE.md`. **Anonymise the customer** and avoid contract values or identifiable detail.
+
+### Who reviews my PR?
+
+See `CODEOWNERS`. The reviewer is the practice lead for the content area you touched (audit, engagement, or innersource).
+
+---
+
+## Post-Specialization
+
+### How long is the Advanced Specialization valid?
+
+Advanced Specializations are valid for **one year** and must be renewed annually. The renewal process includes a re-audit or a lighter evidence update, depending on Microsoft's renewal policy at the time.
+
+### Where does the specialization badge appear?
+
+The badge appears on your **Microsoft AppSource partner profile**, in **Microsoft Partner Finder**, and can be downloaded from Partner Center for use on your website and marketing materials.
+
+{{% alert type="note" %}}
+Benefits and programmes change periodically. Confirm current benefits with your PDM or on the
+[Microsoft Partner Network benefits page](https://partner.microsoft.com/en-us/partnership/partner-network/benefits).
+{{% /alert %}}
