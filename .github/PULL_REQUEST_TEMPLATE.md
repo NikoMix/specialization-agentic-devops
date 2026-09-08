@@ -25,8 +25,9 @@
 ## Checklist
 
 - [ ] `hugo --minify --gc` passes locally with no broken-link warnings
+- [ ] `python .github/scripts/verify_links.py` passes
 - [ ] `python .github/scripts/verify_tables.py` passes
 - [ ] No real customer names, contract values, or identifiable engagement detail in this PR
-- [ ] If evidence requirements changed, `.github/scripts/create-issues.sh` updated to match
+- [ ] If a control's evidence checklist table changed, `python .github/scripts/create_audit_issues.py --repo <owner/name> --dry-run` still parses it
 - [ ] If a Module A/B control page changed, the matching entry in `content/docs/evidence-tracker.md` still aligns
 - [ ] Linked issue: closes #
